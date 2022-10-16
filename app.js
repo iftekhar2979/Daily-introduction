@@ -17,7 +17,7 @@ const catagories=(data)=>{
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ">
                   <li class="nav-item mx-2">
-                    <a class="nav-link active" aria-current="page" onclick="breakingNews('01')" href="#">Home</a>
+                    <a class="nav-link " aria-current="page" onclick="breakingNews('01')" href="#">Home</a>
                   </li>
                   <li class="nav-item  mx-2">
                     <a class="nav-link" href="#"  onclick="breakingNews('02')">Regular News</a>
@@ -58,6 +58,10 @@ const breakingNews=(id)=>{
 }
 
 const breakingNewsData=(data)=>{
+let sorted=data.sort((a, b) => a.title.localeCompare(b.title))
+console.log(sorted);
+    // console.log(sorted);
+    document.querySelector('.nav-link').classList.add('active')
     const getSeciton=document.getElementById('section')
     getSeciton.innerHTML=''
     const otherElement=document.createElement('othersection')
@@ -84,7 +88,7 @@ const breakingNewsData=(data)=>{
     `
     getSeciton.appendChild(otherElement)
     data.map(item=>{
-      
+
         const newElement=document.createElement('div')
     newElement.classList.add('d-flex','my-3','rounded')
     console.log(item);
@@ -95,7 +99,7 @@ const breakingNewsData=(data)=>{
 </div>
 <div class="col-md-9 mx-2">
     <h4>${item.title}</h4>
-    <p>${item.details}</p>
+    <p class='Para'>${item.details.substring(0,200)} <span >...</span></p>
     <div class="d-flex align-items-center">
         <div class="d-flex w-25 h-25">
             <div class="col-md-3">
@@ -103,8 +107,8 @@ const breakingNewsData=(data)=>{
 
             </div>
             <div class="col-md-9 mx-1">
-                <h6>${item.author.name}</h6>
-                <h6 class="text-secondary">${item.author.published_date}</h6>
+                <h6>${item.author.name?item.author.name:'Not Found'}</h6>
+                <h6 class="text-secondary">${item.author.published_date?item.author.published_date:'Not Found'}</h6>
             </div>
         </div>
         <div class="d-flex w-25 h-25 justify-content-center align-items-center">
@@ -124,7 +128,8 @@ const breakingNewsData=(data)=>{
     </div>
 </div>
     `
+   
     getSeciton.appendChild(newElement)
-    getSeciton.appendChild(otherElement)
 })
 }
+
