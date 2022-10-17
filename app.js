@@ -11,7 +11,6 @@ function news() {
 const catagories = (data) => {
   const navbar = document.getElementById('catagory')
   data.forEach(item => {
-    // console.log(item);
     navbar.innerHTML = `
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -191,7 +190,7 @@ const dataLoader=(item)=>{
 
 
   `
-  // console.log(newsection);
+  
 }
 
 
