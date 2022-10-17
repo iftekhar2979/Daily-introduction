@@ -94,6 +94,7 @@ const breakingNewsData = (data) => {
     
     `
   getSeciton.appendChild(otherElement)
+  toggleSpinner(true)
   data.map(item => {
 
     const newElement = document.createElement('div')
@@ -139,6 +140,7 @@ const breakingNewsData = (data) => {
 
     getSeciton.appendChild(newElement)
   })
+  toggleSpinner(false)
 }
 
 
@@ -282,3 +284,11 @@ const blog=()=>{
 
 
 
+const toggleSpinner =(isLoading)=>{
+  const loaderSection=document.getElementById('spinner')
+  if(isLoading){
+    loaderSection.classList.remove('d-none')
+  }else{
+    loaderSection.classList.add('d-none')
+  }
+}
