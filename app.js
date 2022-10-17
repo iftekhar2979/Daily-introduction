@@ -191,7 +191,7 @@ const dataLoader=(item)=>{
 
 const blog=()=>{
   const getSeciton = document.getElementById('catagory')
-  getSeciton.classList.add('container','mx-4','my-2')
+  getSeciton.classList.add('container')
   const newElement=document.createElement('div')
   getSeciton.innerHTML=''
   newElement.innerHTML=
