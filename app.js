@@ -100,11 +100,11 @@ const breakingNewsData = (data) => {
     newElement.classList.add('d-flex', 'my-3', 'rounded')
     console.log(item);
     newElement.innerHTML = `
-    
-    <div class="col-md-3">
-    <img src=${item.thumbnail_url} class='img-fluid rounded' srcset="">
+    <div class='row'>
+    <div class="col-md-3 col-sm-12">
+    <img src=${item.thumbnail_url} class='img-fluid rounded ' srcset="">
 </div>
-<div class="col-md-9 mx-2">
+<div class="col-md-9 col-sm-12 mx-2">
     <h4>${item.title}</h4>
     <p class='Para'>${item.details.substring(0,200)} <span >...</span></p>
     <div class="d-flex align-items-center">
@@ -129,7 +129,8 @@ const breakingNewsData = (data) => {
             <i class="fa-regular fa-star"></i>
         </div>       
         <button type="button" onclick="dataLoad('${item._id}')" class="btn btn-primary" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">Launch demo modal</button>
+        data-bs-target="#exampleModal">Show Details</button>
+       </div>
        </div>
    <section id='hola'></section>
 
