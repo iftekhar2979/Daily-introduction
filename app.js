@@ -1,14 +1,18 @@
-function news(){
-    const url='https://openapi.programming-hero.com/api/news/categories'
-    fetch(url)
-    .then(res=>res.json())
-    .then(data=>catagories(data.data.news_category))
+
+
+
+
+function news() {
+  const url = 'https://openapi.programming-hero.com/api/news/categories'
+  fetch(url)
+    .then(res => res.json())
+    .then(data => catagories(data.data.news_category))
 }
-const catagories=(data)=>{
-    const navbar=document.getElementById('catagory')
-    data.forEach(item=>{
-        // console.log(item);
-        navbar.innerHTML=`
+const catagories = (data) => {
+  const navbar = document.getElementById('catagory')
+  data.forEach(item => {
+    // console.log(item);
+    navbar.innerHTML = `
         <nav class="navbar container navbar-expand-lg navbar-light bg-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,27 +49,27 @@ const catagories=(data)=>{
             </div>
           </nav>
         `
-    })
+  })
 }
 
 
-const breakingNews=(id)=>{
-    const url=`https://openapi.programming-hero.com/api/news/category/${id}`
-    fetch(url)
-    .then(res=>res.json())
-   .then(data=>breakingNewsData(data.data))
-    
+const breakingNews = (id) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${id}`
+  fetch(url)
+    .then(res => res.json())
+    .then(data => breakingNewsData(data.data))
+
 }
 
-const breakingNewsData=(data)=>{
-let sorted=data.sort((a, b) => a.title.localeCompare(b.title))
-console.log(sorted);
-    // console.log(sorted);
-    document.querySelector('.nav-link').classList.add('active')
-    const getSeciton=document.getElementById('section')
-    getSeciton.innerHTML=''
-    const otherElement=document.createElement('othersection')
-    otherElement.innerHTML=
+const breakingNewsData = (data) => {
+  let sorted = data.sort((a, b) => a.title.localeCompare(b.title))
+  // console.log(sorted);
+  // console.log(sorted);
+  document.querySelector('.nav-link').classList.add('active')
+  const getSeciton = document.getElementById('section')
+  getSeciton.innerHTML = ''
+  const otherElement = document.createElement('div')
+  otherElement.innerHTML =
     `
     <div class="alert alert-light" role="alert">
         Total ${data.length} Items found
@@ -86,13 +90,13 @@ console.log(sorted);
       </div>
     
     `
-    getSeciton.appendChild(otherElement)
-    data.map(item=>{
+  getSeciton.appendChild(otherElement)
+  data.map(item => {
 
-        const newElement=document.createElement('div')
-    newElement.classList.add('d-flex','my-3','rounded')
+    const newElement = document.createElement('div')
+    newElement.classList.add('d-flex', 'my-3', 'rounded')
     console.log(item);
-    newElement.innerHTML=`
+    newElement.innerHTML = `
     
     <div class="col-md-3">
     <img src=${item.thumbnail_url} class='img-fluid rounded' srcset="">
@@ -112,7 +116,7 @@ console.log(sorted);
             </div>
         </div>
         <div class="d-flex w-25 h-25 justify-content-center align-items-center">
-            <i class="fa-solid fa-eye"></i><span>${item.total_view}</span>   
+            <i class="fa-solid fa-eye"></i><span>${item.total_view?item.total_view:'0'}</span>   
         </div>
         <div class="d-flex w-25 h-25 justify-content-center align-items-center">
             <i class="fa-regular fa-star"></i>
@@ -120,16 +124,157 @@ console.log(sorted);
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
             <i class="fa-regular fa-star"></i>
-        </div>
-        <div class="d-flex w-25 h-25 justify-content-center align-items-center">
-            <i class="fa-solid fa-arrow-right"></i>
-        </div>
+        </div>       
+        <button type="button" onclick="dataLoad('${item._id}')" class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">Launch demo modal</button>
+       </div>
+   <section id='hola'></section>
 
-    </div>
-</div>
+
     `
-   
+
     getSeciton.appendChild(newElement)
-})
+  })
 }
+
+
+const dataLoad = async newsId => {
+  const url = `https://openapi.programming-hero.com/api/news/${newsId}`
+  try {
+    const response = await fetch(url)
+    const data = await response.json()
+    dataLoader(data.data);
+  } catch {
+    return 'error 404 data not found'
+  }
+}
+const dataLoader=(item)=>{
+  const newsection=document.getElementById('hola')
+  newsection.innerHTML=''
+  newsection.innerHTML=
+
+  `
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${item[0].title}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <img src=${item[0].thumbnail_url} class="img-fluid rounded " alt="" srcset="">
+      <p>Details: ${item[0].details}</p>
+      <div>
+      <img src=${item[0].author.img} class="img-fluid author-img "  alt="" srcset="">
+      <small>Author : ${item[0].author.name}</small>
+      <small>Time : ${item[0].author.published_date
+      }</small>
+      <div class="d-flex w-25 h-25 justify-content-center align-items-center">
+            <i class="fa-solid fa-eye"></i>Views : <span>${item.total_view?item.total_view:'0'}</span>   
+        </div>
+      
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  `
+  // console.log(newsection);
+}
+
+
+const blog=()=>{
+  const getSeciton = document.getElementById('catagory')
+  getSeciton.classList.add('container','mx-4','my-2')
+  const newElement=document.createElement('div')
+  getSeciton.innerHTML=''
+  newElement.innerHTML=
+  `
+  <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Difference Between var ,let and const
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <strong> var : <strong>
+      <ol>
+      <li>Variables declared with var are in the function scope</li>
+      <li> var allowed Hoisting</li>
+      <li>we can re asign a variable by using var</li>
+      <li>we can re declare a variable by using var</li>
+    </ol>
+    <strong> let : <strong>
+    <ol>
+      <li>Variables declared as let are in the block scope.</li>
+      <li>Hoisting is not allowed in let</li>
+      <li>we can reasign a variable by using let</li>
+      <li>we can not re declare a variable by using let</li>
+    </ol>
+    <strong> Const : <strong>
+    <ol>
+    <li>Variables declared as const are in the block scope.</li>
+    <li>Hoisting is not allowed in const</li>
+    <li>We can not re asign a variable by using const</li>
+    <li>We can not re declare a variable by using const</li>
+  </ol>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Difference between function and arrow function
+       
+      </button>
+
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+     <div>
+      <ol>
+      <li>The value of this inside an arrow function remains the same throughout the lifecycle of the function and is always bound to the value of this in the closest non-arrow parent function.</li>
+      <li> Since regular functions are constructible, they can be called using the new keyword.
+    
+      However, the arrow functions are only callable and not constructible, i.e arrow functions can never be used as constructor functions. Hence, they can never be invoked with the new keyword.</li>
+      <li>Arrow functions do not have an arguments binding. However, they have access to the arguments object of the closest non-arrow parent function. Named and rest parameters are heavily relied upon to capture the arguments passed to arrow functions.</li>
+      </ol>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Difference Between forEach , map and filter
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <ol>
+      <li>ForEach : Foreach takes a callback function and run that callback function on each element of array one by one.</li>
+      <li>Map : Map like filter & foreach takes a callback and run it against every element on the array but whats makes it unique is it generate a new array based on your existing array.</li>
+      <li>Filter : The main difference between forEach and filter is that forEach just loop over the array and executes the callback but filter executes the callback and check its return value. If the value is true element remains in the resulting array but if the return value is false the element will be removed for the resulting array.</li>
+      </ol>
+      </div>
+    </div>
+  </div>
+  
+</div>
+  
+  
+  `
+  getSeciton.appendChild(newElement)
+}
+
+
+
 
