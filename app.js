@@ -119,7 +119,7 @@ const breakingNewsData = (data) => {
             </div>
         </div>
         <div class="d-flex w-25 h-25 justify-content-center align-items-center">
-            <i class="fa-solid fa-eye"></i><span>${item.total_view?item.total_view:'0'}</span>   
+            <i class="fa-solid fa-eye"></i><span> total views : <span>${item.total_view?item.total_view:'0'}</span>   
         </div>
         <div class="d-flex w-25 h-25 justify-content-center align-items-center">
             <i class="fa-regular fa-star"></i>
