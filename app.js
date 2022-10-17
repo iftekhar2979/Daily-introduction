@@ -13,41 +13,44 @@ const catagories = (data) => {
   data.forEach(item => {
     // console.log(item);
     navbar.innerHTML = `
-        <nav class="navbar container navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ">
-                  <li class="nav-item mx-2">
-                    <a class="nav-link " aria-current="page" onclick="breakingNews('01')" href="#">Home</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('02')">Regular News</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('03')">Internation News</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('04')">Sports</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('05')">Entertainment</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('06')">Culture </a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('07')">Arts</a>
-                  </li>
-                  <li class="nav-item  mx-2">
-                    <a class="nav-link" href="#"  onclick="breakingNews('08')">ALL News</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Catagories</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <ul class="navbar-nav ">
+            <li class="nav-item mx-2">
+              <a class="nav-link " aria-current="page" onclick="breakingNews('01')" href="#">Home</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('02')">Regular News</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('03')">Internation News</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('04')">Sports</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('05')">Entertainment</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('06')">Culture </a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('07')">Arts</a>
+            </li>
+            <li class="nav-item  mx-2">
+              <a class="nav-link" href="#"  onclick="breakingNews('08')">ALL News</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
         `
   })
 }
